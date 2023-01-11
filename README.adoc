@@ -1,0 +1,27 @@
+= ANSIBLE AWX
+
+This repository contains the files needed to deploy HA AWX Cluster on k3s.
+
+== Requirements
+
+OS: Ubuntu +
+RAM: 8gb+ +
+Disk Space: 20gb+ +
+CPU: 2+ cores (select Type: "host" not kvm64 as it does not have glibc x86-64-v2 support which is required) +
+
+== Installation
+
+1. Clone the repository on the desired server
+2. Add executable permissions to install.sh file and run **./install.sh AS ROOT** to initialize the process.
+3. You'll be prompted to provide a hostname and a https://github.com/ansible/awx-operator/tags[AWX Operator version].
+4. The rest of the process will happen automagically.
+
+IMPORTANT: Do not use an already existing internal hostname.
+
+== Post Installation
+
+Once provisioned and checked, make sure to add the newly created domain in our https://gitlab.og-cs.hr/infra/ansible-group/inventories/ogcs-inventory/-/blob/main/group_vars/dns_servers.yml[OGCS DNS Inventory]. If you're not sure how to do it, check the https://gitlab.og-cs.hr/infra/ansible-group/playbooks/dns-playbook/-/blob/main/README.adoc#user-content-how-to-add-new-a-record[DNS Playbook documentation; section 4.1]
+
+== Credentials
+
+Currently, the username is provided in the awx.yml file and the password in the secret.yml file. TODO: Add credentials to vault
